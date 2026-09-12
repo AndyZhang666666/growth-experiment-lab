@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-09-12T17:26:27.458Z",
+  "config": {
+    "seed": 20260914,
+    "nTrials": 1000,
+    "baseline": 0.08,
+    "mde": 0.02,
+    "alpha": 0.05,
+    "expectedPower": 0.8
+  },
+  "design": {
+    "nControl": 3211,
+    "nTreatment": 3211,
+    "total": 6422
+  },
+  "simulation": {
+    "detected": 811,
+    "actualPower": 0.811,
+    "error": 0.01100000000000001,
+    "pass": true
+  }
+}
