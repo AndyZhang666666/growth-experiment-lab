@@ -4,9 +4,7 @@ import {
   LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer,
   CartesianGrid, ReferenceDot,
 } from 'recharts';
-import {
-  sampleSize, daysNeeded, mdeForDays, normalQuantile,
-} from '@/lib/stats';
+import { sampleSize, daysNeeded, mdeForDays } from '@/lib/stats';
 
 export default function Designer() {
   const [baselinePct, setBaselinePct] = useState(5);
@@ -32,18 +30,20 @@ export default function Designer() {
     }
   }, [baseline, mde, mdeType, alpha, power, dailyTraffic, ratio, daysBudget]);
 
-  // MDE 曲线：1% 到 10%（相对）或对应的绝对提升
+  // MDE 曲线：0.5% 一路拉到 10%，或者拉到当前 MDE 的 1.2 倍（保证红点一定在视野里）
   const curve = useMemo(() => {
+    const absDelta = mdeType === 'relative' ? baseline * mde : mde;
+    const top = Math.max(0.05, Math.min(absDelta * 1.2, 0.5));
     const pts = [];
     for (let i = 1; i <= 20; i++) {
-      const m = (i * 0.5) / 100;
+      const m = (top * i) / 20;
       try {
         const s = sampleSize({ baseline, mde: m, mdeType: 'absolute', alpha, power, ratio });
-        pts.push({ mde: +(m * 100).toFixed(2), n: s.nControl, days: daysNeeded({ ...s, dailyTraffic, ratio }) });
-      } catch { /* 越界跳过 */ }
+        pts.push({ mde: +(m * 100).toFixed(3), n: s.nControl });
+      } catch { /* p₂ 越界，跳过 */ }
     }
     return pts;
-  }, [baseline, alpha, power, ratio, dailyTraffic]);
+  }, [baseline, mde, mdeType, alpha, power, ratio]);
 
   const currentPoint = result.s && Number.isFinite(result.s.nControl)
     ? { mde: +(result.s.delta * 100).toFixed(2), n: result.s.nControl, days: result.days }
@@ -138,10 +138,11 @@ export default function Designer() {
           <ResponsiveContainer>
             <LineChart data={curve} margin={{ top: 8, right: 16, bottom: 8, left: 8 }}>
               <CartesianGrid stroke="#eee" />
-              <XAxis dataKey="mde" tickFormatter={(v) => `${v}%`}
+              <XAxis dataKey="mde" type="number" domain={['dataMin', 'dataMax']}
+                tickFormatter={(v) => `${v}%`}
                 label={{ value: '绝对提升 MDE', position: 'insideBottom', offset: -2, fontSize: 11 }} />
               <YAxis tickFormatter={fmtAxis} width={52} />
-              <Tooltip formatter={(v, n) => (n === 'n' ? fmtNum(v) : `${v} 天`)} labelFormatter={(v) => `MDE ${v}%`} />
+              <Tooltip formatter={(v) => [fmtNum(v), '每组样本量']} labelFormatter={(v) => `MDE ${v}%`} />
               <Line type="monotone" dataKey="n" stroke="var(--accent)" dot={false} strokeWidth={2} />
               {currentPoint && (
                 <ReferenceDot x={currentPoint.mde} y={currentPoint.n} r={4}
