@@ -10,7 +10,8 @@
     "test": "node scripts/test-stats.mjs",
     "sim:peeking": "node scripts/peeking-sim.mjs",
     "sim:power": "node scripts/power-check.mjs",
-    "gen:experiments": "node scripts/gen-experiments.mjs"
+    "gen:experiments": "node scripts/gen-experiments.mjs",
+    "verify:readme": "node scripts/verify-readme.mjs"
   },
   "dependencies": {
     "next": "15.5.3",

@@ -31,6 +31,9 @@ jobs:
       - name: Test stats
         run: npm test
 
+      - name: Verify README numbers against results/
+        run: npm run verify:readme
+
       - name: Build
         run: npm run build
 
