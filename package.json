@@ -1,0 +1,21 @@
+{
+  "name": "growth-experiment-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "node scripts/test-stats.mjs",
+    "sim:peeking": "node scripts/peeking-sim.mjs",
+    "sim:power": "node scripts/power-check.mjs",
+    "gen:experiments": "node scripts/gen-experiments.mjs"
+  },
+  "dependencies": {
+    "next": "15.5.3",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "recharts": "^2.15.0"
+  }
+}
