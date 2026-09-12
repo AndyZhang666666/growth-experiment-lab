@@ -1,0 +1,272 @@
+{
+  "generatedAt": "2026-09-12T17:23:50.873Z",
+  "total": 24,
+  "passed": 24,
+  "failed": 0,
+  "cases": [
+    {
+      "name": "z_{0.975}",
+      "source": "标准正态表",
+      "got": 1.9599627869912815,
+      "expected": 1.959964,
+      "tolerance": 0.00001,
+      "maxError": 0.000001213008718581321,
+      "pass": true
+    },
+    {
+      "name": "z_{0.80}",
+      "source": "标准正态表",
+      "got": 0.841621040955715,
+      "expected": 0.841621,
+      "tolerance": 0.00001,
+      "maxError": 4.095571504159068e-8,
+      "pass": true
+    },
+    {
+      "name": "z_{0.995}",
+      "source": "标准正态表",
+      "got": 2.5758313374461244,
+      "expected": 2.575829,
+      "tolerance": 0.00001,
+      "maxError": 0.0000023374461242120503,
+      "pass": true
+    },
+    {
+      "name": "z_{0.001}（左尾）",
+      "source": "标准正态表",
+      "got": -3.090252582159688,
+      "expected": -3.090232,
+      "tolerance": 0.00005,
+      "maxError": 0.00002058215968814281,
+      "pass": true
+    },
+    {
+      "name": "Φ(1.96)",
+      "source": "标准正态表",
+      "got": 0.9750021748433644,
+      "expected": 0.9750021,
+      "tolerance": 0.000001,
+      "maxError": 7.484336439489425e-8,
+      "pass": true
+    },
+    {
+      "name": "Φ(-1)",
+      "source": "标准正态表",
+      "got": 0.15865525956313153,
+      "expected": 0.1586553,
+      "tolerance": 0.000001,
+      "maxError": 4.043686846477712e-8,
+      "pass": true
+    },
+    {
+      "name": "Φ(0)",
+      "source": "定义",
+      "got": 0.5000000005248086,
+      "expected": 0.5,
+      "tolerance": 1e-9,
+      "maxError": 5.248086409892494e-10,
+      "pass": true
+    },
+    {
+      "name": "Evan Miller 公式复现：20% 基线、+5% 绝对",
+      "source": "evanmiller.org/ab-testing/sample-size.html 页面默认示例 = 1030",
+      "got": 1031,
+      "expected": 1030,
+      "tolerance": 1,
+      "maxError": 1,
+      "pass": true
+    },
+    {
+      "name": "本项目公式：20% 基线、+5% 绝对",
+      "source": "手算 (z_α/2+z_β)²·[p₁(1-p₁)+p₂(1-p₂)]/δ² = 1091",
+      "got": 1091,
+      "expected": 1091,
+      "tolerance": 1,
+      "maxError": 0,
+      "pass": true
+    },
+    {
+      "name": "本项目公式：10% 基线、相对 +20%",
+      "source": "手算 = 3839",
+      "got": 3839,
+      "expected": 3839,
+      "tolerance": 1,
+      "maxError": 0,
+      "pass": true
+    },
+    {
+      "name": "非均分 ratio=0.25 的 control 样本量",
+      "source": "手算 = 2269",
+      "got": 2269,
+      "expected": 2269,
+      "tolerance": 1,
+      "maxError": 0,
+      "pass": true
+    },
+    {
+      "name": "反推 MDE 再算天数应回到 7 天",
+      "source": "自洽性",
+      "got": 7,
+      "expected": 7,
+      "tolerance": 0,
+      "maxError": 0,
+      "pass": true
+    },
+    {
+      "name": "Agresti 阿司匹林例：z 统计量",
+      "source": "Agresti CDA 2nd ed. §2.1（书中 z≈5.0）",
+      "got": 5.001388204008378,
+      "expected": 5.001,
+      "tolerance": 0.01,
+      "maxError": 0.00038820400837735747,
+      "pass": true
+    },
+    {
+      "name": "Agresti 阿司匹林例：相对风险差方向为负",
+      "source": "书中结论",
+      "got": -1,
+      "expected": -1,
+      "tolerance": 0,
+      "maxError": 0,
+      "pass": true
+    },
+    {
+      "name": "两组完全相同时 p ≈ 1",
+      "source": "定义（浮点精度限制）",
+      "got": 0.9999999989503827,
+      "expected": 1,
+      "tolerance": 1e-8,
+      "maxError": 1.0496172819784988e-9,
+      "pass": true
+    },
+    {
+      "name": "Wilson 81/263",
+      "source": "Newcombe 1998, Stat Med 17:857, Table I",
+      "got": [
+        0.2552885500307755,
+        0.3662095401716528
+      ],
+      "expected": [
+        0.2553,
+        0.3662
+      ],
+      "tolerance": 0.0005,
+      "maxError": 0.000011449969224530676,
+      "pass": true
+    },
+    {
+      "name": "Wilson 15/148",
+      "source": "Newcombe 1998, Table I",
+      "got": [
+        0.062386417964842386,
+        0.16048719926370114
+      ],
+      "expected": [
+        0.0624,
+        0.1605
+      ],
+      "tolerance": 0.0005,
+      "maxError": 0.000013582035157611028,
+      "pass": true
+    },
+    {
+      "name": "Wilson 0/20",
+      "source": "Newcombe 1998, Table I",
+      "got": [
+        0,
+        0.16112499288113644
+      ],
+      "expected": [
+        0,
+        0.1611
+      ],
+      "tolerance": 0.0005,
+      "maxError": 0.000024992881136443046,
+      "pass": true
+    },
+    {
+      "name": "Newcombe 差 56/70 vs 48/80",
+      "source": "Newcombe 1998 (差值), Table II 方法 10",
+      "got": [
+        0.05243156414136904,
+        0.33387257819431626
+      ],
+      "expected": [
+        0.0524,
+        0.3339
+      ],
+      "tolerance": 0.0005,
+      "maxError": 0.00003156414136903929,
+      "pass": true
+    },
+    {
+      "name": "Newcombe 差 9/10 vs 3/10",
+      "source": "Newcombe 1998 (差值), Table II 方法 10",
+      "got": [
+        0.17052298934711402,
+        0.8090179069384493
+      ],
+      "expected": [
+        0.1705,
+        0.809
+      ],
+      "tolerance": 0.0005,
+      "maxError": 0.000022989347114005243,
+      "pass": true
+    },
+    {
+      "name": "Newcombe 差 5/56 vs 0/29",
+      "source": "Newcombe 1998 (差值), Table II 方法 10",
+      "got": [
+        -0.03813702450531577,
+        0.1925599345614158
+      ],
+      "expected": [
+        -0.0381,
+        0.1926
+      ],
+      "tolerance": 0.0005,
+      "maxError": 0.00004006543858420253,
+      "pass": true
+    },
+    {
+      "name": "Bonferroni K=14 边界",
+      "source": "z_{1-0.05/28} = 2.914",
+      "got": 2.9137381017627573,
+      "expected": 2.9137,
+      "tolerance": 0.001,
+      "maxError": 0.00003810176275731436,
+      "pass": true
+    },
+    {
+      "name": "mulberry32 同种子同序列",
+      "source": "定义",
+      "got": [
+        0.6011037519201636,
+        0.44829055899754167,
+        0.8524657934904099,
+        0.6697340414393693,
+        0.17481389874592423
+      ],
+      "expected": [
+        0.6011037519201636,
+        0.44829055899754167,
+        0.8524657934904099,
+        0.6697340414393693,
+        0.17481389874592423
+      ],
+      "tolerance": 0,
+      "maxError": 0,
+      "pass": true
+    },
+    {
+      "name": "mulberry32 均值 ≈ 0.5",
+      "source": "均匀分布期望；N=200000 时 3σ ≈ 0.002",
+      "got": 0.49925316415950655,
+      "expected": 0.5,
+      "tolerance": 0.002,
+      "maxError": 0.0007468358404934539,
+      "pass": true
+    }
+  ]
+}
