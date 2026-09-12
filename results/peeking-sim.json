@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T17:25:43.203Z",
+  "generatedAt": "2026-09-12T17:36:36.247Z",
   "config": {
     "seed": 20260913,
     "nTrials": 2000,
@@ -8,11 +8,31 @@
     "trueConversionRate": 0.1,
     "alpha": 0.05
   },
+  "strategies": [
+    {
+      "key": "final",
+      "label": "只看一次（结束时）",
+      "note": "标准的固定样本量检验"
+    },
+    {
+      "key": "peeking",
+      "label": "每天偷看，一显著就停",
+      "note": "最常见的坏习惯"
+    },
+    {
+      "key": "obf",
+      "label": "O'Brien-Fleming 序贯边界",
+      "note": "c·√(K/k)，早期门槛高、后期回落"
+    },
+    {
+      "key": "bonferroni",
+      "label": "Bonferroni 分摊",
+      "note": "每次检查用 α/K，最保守"
+    }
+  ],
   "results": {
     "final": {
       "falsePositiveRate": 0.0495,
-      "expectedFPR": 0.05,
-      "nTrials": 2000,
       "nFalsePositives": 99,
       "nStopped": 2000,
       "stopDayDistribution": [
@@ -25,8 +45,6 @@
     },
     "peeking": {
       "falsePositiveRate": 0.2245,
-      "expectedFPR": 0.05,
-      "nTrials": 2000,
       "nFalsePositives": 449,
       "nStopped": 449,
       "stopDayDistribution": [
@@ -104,8 +122,6 @@
     },
     "obf": {
       "falsePositiveRate": 0.066,
-      "expectedFPR": 0.05,
-      "nTrials": 2000,
       "nFalsePositives": 132,
       "nStopped": 132,
       "stopDayDistribution": [
@@ -167,31 +183,44 @@
       ]
     },
     "bonferroni": {
-      "falsePositiveRate": 0.004,
-      "expectedFPR": 0.05,
-      "nTrials": 2000,
-      "nFalsePositives": 8,
-      "nStopped": 8,
+      "falsePositiveRate": 0.023,
+      "nFalsePositives": 46,
+      "nStopped": 46,
       "stopDayDistribution": [
         {
           "day": 1,
-          "count": 1,
-          "pct": 0.05
+          "count": 10,
+          "pct": 0.5
         },
         {
           "day": 2,
-          "count": 1,
-          "pct": 0.05
+          "count": 3,
+          "pct": 0.15
         },
         {
           "day": 3,
+          "count": 4,
+          "pct": 0.2
+        },
+        {
+          "day": 4,
+          "count": 3,
+          "pct": 0.15
+        },
+        {
+          "day": 5,
           "count": 2,
           "pct": 0.1
         },
         {
           "day": 6,
-          "count": 1,
-          "pct": 0.05
+          "count": 4,
+          "pct": 0.2
+        },
+        {
+          "day": 7,
+          "count": 4,
+          "pct": 0.2
         },
         {
           "day": 8,
@@ -199,17 +228,43 @@
           "pct": 0.1
         },
         {
+          "day": 9,
+          "count": 5,
+          "pct": 0.25
+        },
+        {
+          "day": 10,
+          "count": 2,
+          "pct": 0.1
+        },
+        {
+          "day": 11,
+          "count": 1,
+          "pct": 0.05
+        },
+        {
+          "day": 12,
+          "count": 1,
+          "pct": 0.05
+        },
+        {
           "day": 13,
+          "count": 4,
+          "pct": 0.2
+        },
+        {
+          "day": 14,
           "count": 1,
           "pct": 0.05
         }
       ]
     }
   },
-  "conclusion": {
-    "finalOnly": "4.95% 假阳性率，符合 α=0.05 的理论值",
-    "peeking": "22.45% 假阳性率，是理论值的 4.5 倍",
-    "obf": "6.60% 假阳性率，O'Brien-Fleming 边界能压回接近 0.05",
-    "bonferroni": "0.40% 假阳性率，Bonferroni 最保守"
+  "summary": {
+    "finalOnlyFpr": 0.0495,
+    "peekingFpr": 0.2245,
+    "peekingInflation": 4.49,
+    "obfFpr": 0.066,
+    "bonferroniFpr": 0.023
   }
 }
