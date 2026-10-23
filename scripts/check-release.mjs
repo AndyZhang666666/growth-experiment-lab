@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { interpret } from '../lib/stats.js';
+const positive = interpret({ n1: 5000, x1: 400, n2: 5000, x2: 455 });
+assert.match(positive.title, /待核对上线条件/);
+assert.ok(!positive.reasons.join('').includes('不是抽样波动能解释'));
+const custom = interpret({ n1: 5000, x1: 400, n2: 5000, x2: 455, alpha: 0.1 });
+assert.ok(custom.reasons.some(x => x.includes('90%')));
+assert.doesNotMatch(readFileSync('components/Reader.js', 'utf8'), /最保守情况下也至少要拿到/);
+console.log('PASS: bounded release decision, dynamic confidence label and no guaranteed revenue');

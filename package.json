@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prebuild": "node scripts/check-release.mjs",
+    "check:release": "node scripts/check-release.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

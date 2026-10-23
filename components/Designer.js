@@ -126,7 +126,7 @@ export default function Designer() {
             </div>
             <p className="note">
               目标提升是 {fmtPct(result.s.delta)} 绝对提升。
-              如果把实验从 {result.days} 天压到 {daysBudget} 天，能确信检出的最小提升会变成 {fmtPct(result.reverse)}。
+              时间预算设为 {daysBudget} 天时，在当前假设下可检出的最小提升约为 {fmtPct(result.reverse)}；这不是检出承诺。
             </p>
           </>
         )}

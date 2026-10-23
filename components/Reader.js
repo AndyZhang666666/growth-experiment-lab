@@ -16,7 +16,10 @@ export default function Reader() {
   const [monthlyTraffic, setMonthlyTraffic] = useState(150000);
 
   const r = useMemo(() => {
-    if (nControl <= 0 || nTreatment <= 0 || xControl > nControl || xTreatment > nTreatment) return null;
+    if (![nControl, nTreatment, xControl, xTreatment].every(Number.isSafeInteger) ||
+        nControl <= 0 || nTreatment <= 0 || xControl < 0 || xTreatment < 0 ||
+        xControl > nControl || xTreatment > nTreatment || !Number.isFinite(alpha) || alpha <= 0 || alpha >= 1 ||
+        !Number.isFinite(value) || value < 0 || !Number.isFinite(monthlyTraffic) || monthlyTraffic < 0) return null;
     try {
       const test = zTest({ n1: nControl, x1: xControl, n2: nTreatment, x2: xTreatment });
       const ci = newcombeInterval({ n1: nControl, x1: xControl, n2: nTreatment, x2: xTreatment, alpha });
@@ -101,7 +104,7 @@ export default function Reader() {
 
         <section className="panel">
           <h2>结论</h2>
-          {!r && <p className="err">输入不合法：转化数不能大于样本量。</p>}
+          {!r && <p className="err" role="alert">请检查输入：样本量需为正整数，转化数需为 0 到样本量之间的整数，α 在 0 与 1 之间，业务参数不可为负。</p>}
           {r?.error && <p className="err">{r.error}</p>}
           {r && !r.error && (
             <>
@@ -118,7 +121,7 @@ export default function Reader() {
                 <div><span>相对提升</span><b>{fmtPct(r.test.relDiff, 1)}</b></div>
                 <div><span>p 值</span><b>{r.test.pValue < 0.0001 ? '<0.0001' : r.test.pValue.toFixed(4)}</b></div>
                 <div>
-                  <span>95% CI（Newcombe）</span>
+                  <span>{Math.round((1 - alpha) * 100)}% CI（Newcombe）</span>
                   <b>[{fmtPct(r.ci[0])}, {fmtPct(r.ci[1])}]</b>
                 </div>
               </div>
@@ -146,7 +149,7 @@ export default function Reader() {
               </ResponsiveContainer>
             </div>
             <p className="note">
-              误差棒是 95% 置信区间。区间不跨 0 才叫显著。
+              误差棒是 {Math.round((1 - alpha) * 100)}% 置信区间，用来描述提升估计的不确定性，不是收益保证。
               这里用 Newcombe 方法（基于 Wilson），小样本和极端转化率下比正态近似稳 ——
               正态近似给出的区间是 [{fmtPct(r.wald[0])}, {fmtPct(r.wald[1])}]，你可以对比着看差多少。
             </p>
@@ -163,11 +166,16 @@ export default function Reader() {
                   </div>
                 </div>
                 <p className="note">
-                  用置信区间的<strong>下界和上界</strong>，不是点估计。下界 ¥{fmtMoney(r.money.low)}
-                  是你「最保守情况下也至少要拿到」的增量 ——
-                  决定要不要全量，看下界，不看那个好看的点估计。
-                  {r.money.low < 0 && ' 注意下界是负的：最坏情况下这个改动可能是亏的。'}
+                  这里将提升区间乘以假设流量和单次价值，得到收入情景范围，不是未来保底收益，也不是净利润。
+                  置信区间下界不能解释为至少能拿到的金额；尚未扣除实施成本，也未考虑流量和客群变化。
+                  {r.money.low < 0 && ' 区间包含负向变化，扩大流量前需要特别谨慎。'}
                 </p>
+                <h3 style={{ marginTop: 18 }}>上线前还要核对</h3>
+                <ul className="note">
+                  <li>分流是否随机，样本比例、埋点和预定停止规则是否正常。</li>
+                  <li>留存、退款、投诉及资源成本等护栏是否可接受。</li>
+                  <li>扣除实施成本后，是否超过事先约定的最低业务收益。</li>
+                </ul>
               </>
             )}
           </section>
