@@ -1,20 +1,27 @@
 {
-  "generatedAt": "2026-09-12T18:45:10.917Z",
+  "modelVersion": "bounded-ledger-v2",
   "seed": 20260915,
-  "note": "所有实验数据均为合成，场景虚构。数字来自 binomial 抽样（种子 20260915），统计量与复盘里的定量部分由 zTest / newcombeInterval 计算，不存在手写数字。",
+  "note": "全部为合成案例；每案例单次抽样。计划为作者预置，护栏无观测数据，统计证据不直接批准全量。",
   "experiments": [
     {
       "id": "exp-001",
       "resampleAttempts": 1,
-      "hypothesis": "新人优惠券从「满 30 减 5」改成「满 20 减 5」，能提升首单转化",
-      "metric": "7 日内首单转化率",
-      "guardRail": "次单留存不能低于对照组 -3%",
+      "hypothesis": "降低新人优惠券使用门槛，提升首单转化",
+      "metric": "7 日首单转化率",
+      "direction": "higher",
+      "guardRail": "次单留存与补贴成本",
       "nControl": 5200,
       "xControl": 409,
       "nTreatment": 5200,
       "xTreatment": 569,
       "days": 14,
-      "decision": "全量",
+      "decision": "待核对",
+      "plan": {
+        "nPerGroup": 5200,
+        "days": 14,
+        "reached": true,
+        "source": "作者预置的合成计划；未按观测效应追加样本"
+      },
       "stats": {
         "pControl": 0.07865384615384616,
         "pTreatment": 0.10942307692307693,
@@ -26,24 +33,29 @@
           0.04200006045497661
         ],
         "significant": true,
-        "label": "显著",
-        "wouldContinue": false,
-        "neededSampleForObserved": null
+        "label": "有差异证据"
       },
-      "review": "7.87% → 10.94%，绝对提升 +3.08%，相对 +39.1%，p < 0.0001，95% CI [+1.96%, +4.20%]（显著）。门槛从 30 降到 20，新人在首单就能用掉券，决策链短了一截。护栏指标没动，可以放心全量"
+      "review": "p=0.0000；95% 差值区间 [1.96, 4.20] 个百分点。指标方向：越高越好。已达预置终点，记录统计证据后另核对业务门槛与护栏。护栏未提供观测数据，不能声称已通过，也不自动全量。"
     },
     {
       "id": "exp-002",
       "resampleAttempts": 1,
-      "hypothesis": "结算页「去支付」按钮从绿色改成橙色，提升支付转化",
+      "hypothesis": "结算按钮换色，提升支付转化",
       "metric": "加购到支付转化率",
-      "guardRail": "加购率不降",
+      "direction": "higher",
+      "guardRail": "加购率与误触率",
       "nControl": 3800,
       "xControl": 1609,
       "nTreatment": 3800,
       "xTreatment": 1576,
       "days": 10,
-      "decision": "不推",
+      "decision": "待核对",
+      "plan": {
+        "nPerGroup": 3800,
+        "days": 10,
+        "reached": true,
+        "source": "作者预置的合成计划；未按观测效应追加样本"
+      },
       "stats": {
         "pControl": 0.4234210526315789,
         "pTreatment": 0.4147368421052632,
@@ -55,24 +67,29 @@
           0.01349628644615124
         ],
         "significant": false,
-        "label": "不显著",
-        "wouldContinue": false,
-        "neededSampleForObserved": 50948
+        "label": "未达到显著门槛"
       },
-      "review": "42.34% → 41.47%，绝对提升 -0.87%，相对 -2.1%，p = 0.4430，95% CI [-3.09%, +1.35%]（不显著）。按观测到的效应量，每组要约 50,948 人才有 80% 把握检出。颜色本身不传递信息，用户在这个页面的注意力在金额和地址上。两个方向的差异都在抽样噪声范围内"
+      "review": "p=0.4430；95% 差值区间 [-3.09, 1.35] 个百分点。指标方向：越高越好。已达预置终点，记录统计证据后另核对业务门槛与护栏。护栏未提供观测数据，不能声称已通过，也不自动全量。"
     },
     {
       "id": "exp-003",
       "resampleAttempts": 1,
-      "hypothesis": "推送从晚 8 点改到中午 12 点，提升打开率",
+      "hypothesis": "推送改到中午，提升打开率",
       "metric": "推送 1 小时打开率",
-      "guardRail": "次日留存不降",
+      "direction": "higher",
+      "guardRail": "次日留存、退订与运营成本",
       "nControl": 40000,
       "xControl": 6022,
       "nTreatment": 40000,
       "xTreatment": 6370,
       "days": 7,
-      "decision": "不推",
+      "decision": "待核对",
+      "plan": {
+        "nPerGroup": 40000,
+        "days": 7,
+        "reached": true,
+        "source": "作者预置的合成计划；未按观测效应追加样本"
+      },
       "stats": {
         "pControl": 0.15055,
         "pTreatment": 0.15925,
@@ -84,24 +101,29 @@
           0.013714107960400238
         ],
         "significant": true,
-        "label": "显著但不值得",
-        "wouldContinue": false,
-        "neededSampleForObserved": null
+        "label": "有差异证据"
       },
-      "review": "15.05% → 15.93%，绝对提升 +0.87%，相对 +5.8%，p = 0.0007，95% CI [+0.37%, +1.37%]（显著但不值得）。统计上确实显著，但绝对提升只有一个点量级 —— 折算成日活增量只有百人量级，抵不上调整全量推送时段带来的运营成本和晚间流量损失。显著不等于值得"
+      "review": "p=0.0007；95% 差值区间 [0.37, 1.37] 个百分点。指标方向：越高越好。已达预置终点，记录统计证据后另核对业务门槛与护栏。护栏未提供观测数据，不能声称已通过，也不自动全量。"
     },
     {
       "id": "exp-004",
       "resampleAttempts": 1,
-      "hypothesis": "首页瀑布流从 2 列改成 3 列，提升内容曝光和点击",
+      "hypothesis": "首页从两列改三列，提升内容点击",
       "metric": "首页内容点击率",
-      "guardRail": "停留时长不降",
+      "direction": "higher",
+      "guardRail": "停留时长与误触率",
       "nControl": 6500,
       "xControl": 1807,
       "nTreatment": 6500,
       "xTreatment": 1540,
       "days": 5,
-      "decision": "回滚",
+      "decision": "停止扩流",
+      "plan": {
+        "nPerGroup": 6500,
+        "days": 5,
+        "reached": true,
+        "source": "作者预置的合成计划；未按观测效应追加样本"
+      },
       "stats": {
         "pControl": 0.278,
         "pTreatment": 0.23692307692307693,
@@ -113,185 +135,213 @@
           -0.026051167896554317
         ],
         "significant": true,
-        "label": "显著",
-        "wouldContinue": false,
-        "neededSampleForObserved": null
+        "label": "有差异证据"
       },
-      "review": "27.80% → 23.69%，绝对提升 -4.11%，相对 -14.8%，p < 0.0001，95% CI [-5.61%, -2.61%]（显著）。3 列把单卡尺寸压小了，封面图看不清，点起来也更容易点错。方向明确为负，不用再跑，直接回滚"
+      "review": "p=0.0000；95% 差值区间 [-5.61, -2.61] 个百分点。指标方向：越高越好。先停止扩大流量并排查风险。护栏未提供观测数据，不能声称已通过，也不自动全量。"
     },
     {
       "id": "exp-005",
-      "resampleAttempts": 6,
-      "hypothesis": "商品详情页加「限时特价」标签，提升加购率",
+      "resampleAttempts": 1,
+      "hypothesis": "详情页添加限时标签，提升加购",
       "metric": "详情页到加购转化率",
-      "guardRail": "实付金额不降",
+      "direction": "higher",
+      "guardRail": "实付金额与投诉",
       "nControl": 6000,
-      "xControl": 1078,
+      "xControl": 1090,
       "nTreatment": 6000,
-      "xTreatment": 1148,
+      "xTreatment": 1110,
       "days": 10,
-      "decision": "继续跑",
+      "decision": "按计划继续",
+      "plan": {
+        "nPerGroup": 12000,
+        "days": 14,
+        "reached": false,
+        "source": "作者预置的合成计划；未按观测效应追加样本"
+      },
       "stats": {
-        "pControl": 0.17966666666666667,
-        "pTreatment": 0.19133333333333333,
-        "absDiff": 0.011666666666666659,
-        "relDiff": 0.06493506493506489,
-        "pValue": 0.10018547478509165,
+        "pControl": 0.18166666666666667,
+        "pTreatment": 0.185,
+        "absDiff": 0.003333333333333327,
+        "relDiff": 0.018348623853210975,
+        "pValue": 0.6370398630770762,
         "ci95": [
-          -0.002244248835299752,
-          0.02557393265589944
+          -0.010514728899833046,
+          0.01718039761795345
         ],
         "significant": false,
-        "label": "不显著",
-        "wouldContinue": true,
-        "neededSampleForObserved": 17422
+        "label": "未达到显著门槛"
       },
-      "review": "17.97% → 19.13%，绝对提升 +1.17%，相对 +6.5%，p = 0.1002，95% CI [-0.22%, +2.56%]（不显著）。按观测到的效应量，每组要约 17,422 人才有 80% 把握检出。现在这个样本量还下不了结论，但观测到的效应量如果真实存在，再加一倍多的样本就够检出。继续跑到设计的天数，中途不要因为某天数字好看就停"
+      "review": "p=0.6370；95% 差值区间 [-1.05, 1.72] 个百分点。指标方向：越高越好。尚未达到预置计划终点，不按当前 p 值改变计划。护栏未提供观测数据，不能声称已通过，也不自动全量。"
     },
     {
       "id": "exp-006",
       "resampleAttempts": 1,
-      "hypothesis": "搜索框 placeholder 从「搜索商品」改成「搜你想要的」，提升搜索使用率",
-      "metric": "7 日内搜索渗透率",
-      "guardRail": "搜索质量（点击率）不降",
+      "hypothesis": "重写搜索提示语，提升搜索使用",
+      "metric": "7 日搜索渗透率",
+      "direction": "higher",
+      "guardRail": "搜索结果点击与满意度",
       "nControl": 4500,
-      "xControl": 1547,
+      "xControl": 1579,
       "nTreatment": 4500,
-      "xTreatment": 1734,
+      "xTreatment": 1747,
       "days": 10,
-      "decision": "全量",
+      "decision": "待核对",
+      "plan": {
+        "nPerGroup": 4500,
+        "days": 10,
+        "reached": true,
+        "source": "作者预置的合成计划；未按观测效应追加样本"
+      },
       "stats": {
-        "pControl": 0.3437777777777778,
-        "pTreatment": 0.38533333333333336,
-        "absDiff": 0.04155555555555557,
-        "relDiff": 0.12087912087912091,
-        "pValue": 0.00004216093922781994,
+        "pControl": 0.35088888888888886,
+        "pTreatment": 0.38822222222222225,
+        "absDiff": 0.037333333333333385,
+        "relDiff": 0.10639645345155177,
+        "pValue": 0.00024375077643301601,
         "ci95": [
-          0.02167077129990184,
-          0.0613941933791146
+          0.017390279861524468,
+          0.057234649227259835
         ],
         "significant": true,
-        "label": "显著",
-        "wouldContinue": false,
-        "neededSampleForObserved": null
+        "label": "有差异证据"
       },
-      "review": "34.38% → 38.53%，绝对提升 +4.16%，相对 +12.1%，p < 0.0001，95% CI [+2.17%, +6.14%]（显著）。「搜索商品」像在描述功能，「搜你想要的」像在描述收益，后者更能促使人去试。搜索点击率持平，说明进来的不是无效搜索"
+      "review": "p=0.0002；95% 差值区间 [1.74, 5.72] 个百分点。指标方向：越高越好。已达预置终点，记录统计证据后另核对业务门槛与护栏。护栏未提供观测数据，不能声称已通过，也不自动全量。"
     },
     {
       "id": "exp-007",
       "resampleAttempts": 1,
-      "hypothesis": "订单确认页加「预计送达时间」，降低取消率",
-      "metric": "下单后 30 分钟取消率",
-      "guardRail": "客服咨询量不涨",
+      "hypothesis": "确认页增加送达时间，降低取消",
+      "metric": "下单后取消率",
+      "direction": "lower",
+      "guardRail": "客服咨询与履约准确性",
       "nControl": 8200,
-      "xControl": 416,
+      "xControl": 439,
       "nTreatment": 8200,
-      "xTreatment": 442,
+      "xTreatment": 390,
       "days": 12,
-      "decision": "不推",
+      "decision": "待核对",
+      "plan": {
+        "nPerGroup": 8200,
+        "days": 12,
+        "reached": true,
+        "source": "作者预置的合成计划；未按观测效应追加样本"
+      },
       "stats": {
-        "pControl": 0.050731707317073174,
-        "pTreatment": 0.05390243902439024,
-        "absDiff": 0.003170731707317069,
-        "relDiff": 0.06249999999999992,
-        "pValue": 0.36187551263447837,
+        "pControl": 0.05353658536585366,
+        "pTreatment": 0.0475609756097561,
+        "absDiff": -0.005975609756097559,
+        "relDiff": -0.11161731207289291,
+        "pValue": 0.08071432004521095,
         "ci95": [
-          -0.003652882707897348,
-          0.010000709589684732
+          -0.012698696514228072,
+          0.0007348204716729331
         ],
         "significant": false,
-        "label": "不显著",
-        "wouldContinue": false,
-        "neededSampleForObserved": 77412
+        "label": "未达到显著门槛"
       },
-      "review": "5.07% → 5.39%，绝对提升 +0.32%，相对 +6.2%，p = 0.3619，95% CI [-0.37%, +1.00%]（不显著）。按观测到的效应量，每组要约 77,412 人才有 80% 把握检出。取消主要发生在价格和库存变动上，送达时间不是用户的决策变量。样本量已经不小了，再跑也是这个结论"
+      "review": "p=0.0807；95% 差值区间 [-1.27, 0.07] 个百分点。指标方向：越低越好。已达预置终点，记录统计证据后另核对业务门槛与护栏。护栏未提供观测数据，不能声称已通过，也不自动全量。"
     },
     {
       "id": "exp-008",
       "resampleAttempts": 1,
-      "hypothesis": "新人引导从 5 步简化成 3 步，提升完成率",
-      "metric": "引导流程完成率",
-      "guardRail": "次日留存不降",
+      "hypothesis": "新人引导从五步减到三步",
+      "metric": "引导完成率",
+      "direction": "higher",
+      "guardRail": "次日留存与资料质量",
       "nControl": 3200,
-      "xControl": 2007,
+      "xControl": 1996,
       "nTreatment": 3200,
-      "xTreatment": 2283,
+      "xTreatment": 2277,
       "days": 8,
-      "decision": "全量",
+      "decision": "待核对",
+      "plan": {
+        "nPerGroup": 3200,
+        "days": 8,
+        "reached": true,
+        "source": "作者预置的合成计划；未按观测效应追加样本"
+      },
       "stats": {
-        "pControl": 0.6271875,
-        "pTreatment": 0.7134375,
-        "absDiff": 0.08624999999999994,
-        "relDiff": 0.1375186846038863,
-        "pValue": 2.1715962361668062e-13,
+        "pControl": 0.62375,
+        "pTreatment": 0.7115625,
+        "absDiff": 0.08781249999999996,
+        "relDiff": 0.14078156312625242,
+        "pValue": 8.948397578478762e-14,
         "ci95": [
-          0.06325924765244773,
-          0.10911393698822279
+          0.06477701483936996,
+          0.11071819042900885
         ],
         "significant": true,
-        "label": "显著",
-        "wouldContinue": false,
-        "neededSampleForObserved": null
+        "label": "有差异证据"
       },
-      "review": "62.72% → 71.34%，绝对提升 +8.62%，相对 +13.8%，p < 0.0001，95% CI [+6.33%, +10.91%]（显著）。砍掉的两步都是「信息填写」类，用户在这个阶段还没有给出信息的意愿。完成率涨得很干脆，全量"
+      "review": "p=0.0000；95% 差值区间 [6.48, 11.07] 个百分点。指标方向：越高越好。已达预置终点，记录统计证据后另核对业务门槛与护栏。护栏未提供观测数据，不能声称已通过，也不自动全量。"
     },
     {
       "id": "exp-009",
       "resampleAttempts": 1,
-      "hypothesis": "评价晒图从默认 3 张改成 6 张，提升晒图率",
+      "hypothesis": "增加评价晒图上限",
       "metric": "评价带图比例",
-      "guardRail": "评价提交率不降",
+      "direction": "higher",
+      "guardRail": "评价提交率与加载性能",
       "nControl": 5100,
-      "xControl": 1166,
+      "xControl": 1180,
       "nTreatment": 5100,
-      "xTreatment": 1150,
+      "xTreatment": 1156,
       "days": 11,
-      "decision": "不推",
+      "decision": "待核对",
+      "plan": {
+        "nPerGroup": 5100,
+        "days": 11,
+        "reached": true,
+        "source": "作者预置的合成计划；未按观测效应追加样本"
+      },
       "stats": {
-        "pControl": 0.22862745098039217,
-        "pTreatment": 0.22549019607843138,
-        "absDiff": -0.00313725490196079,
-        "relDiff": -0.013722126929674124,
-        "pValue": 0.7053106190125913,
+        "pControl": 0.23137254901960785,
+        "pTreatment": 0.22666666666666666,
+        "absDiff": -0.004705882352941199,
+        "relDiff": -0.020338983050847553,
+        "pValue": 0.5717154530312103,
         "ci95": [
-          -0.0193952367094586,
-          0.013122649965268358
+          -0.021012442340288102,
+          0.011603605204812614
         ],
         "significant": false,
-        "label": "不显著",
-        "wouldContinue": false,
-        "neededSampleForObserved": 282625
+        "label": "未达到显著门槛"
       },
-      "review": "22.86% → 22.55%，绝对提升 -0.31%，相对 -1.4%，p = 0.7053，95% CI [-1.94%, +1.31%]（不显著）。按观测到的效应量，每组要约 282,625 人才有 80% 把握检出。愿意晒图的人本来就挑好了图，不愿意的人也没有因为上限放宽而改变意愿。上限不是瓶颈"
+      "review": "p=0.5717；95% 差值区间 [-2.10, 1.16] 个百分点。指标方向：越高越好。已达预置终点，记录统计证据后另核对业务门槛与护栏。护栏未提供观测数据，不能声称已通过，也不自动全量。"
     },
     {
       "id": "exp-010",
       "resampleAttempts": 1,
-      "hypothesis": "会员续费页加「已省金额」累计展示，提升续费率",
-      "metric": "到期前 7 日续费率",
-      "guardRail": "用户满意度不降",
+      "hypothesis": "续费页展示累计已省金额",
+      "metric": "到期前续费率",
+      "direction": "higher",
+      "guardRail": "满意度、退款与长期留存",
       "nControl": 2800,
-      "xControl": 1300,
+      "xControl": 1338,
       "nTreatment": 2800,
-      "xTreatment": 1511,
+      "xTreatment": 1494,
       "days": 14,
-      "decision": "全量",
+      "decision": "待核对",
+      "plan": {
+        "nPerGroup": 2800,
+        "days": 14,
+        "reached": true,
+        "source": "作者预置的合成计划；未按观测效应追加样本"
+      },
       "stats": {
-        "pControl": 0.4642857142857143,
-        "pTreatment": 0.5396428571428571,
-        "absDiff": 0.07535714285714279,
-        "relDiff": 0.16230769230769215,
-        "pValue": 1.7125707074683305e-8,
+        "pControl": 0.47785714285714287,
+        "pTreatment": 0.5335714285714286,
+        "absDiff": 0.055714285714285716,
+        "relDiff": 0.11659192825112108,
+        "pValue": 0.00003053877282854778,
         "ci95": [
-          0.04918550310683466,
-          0.10138277520828118
+          0.029529466087718895,
+          0.08179116922083812
         ],
         "significant": true,
-        "label": "显著",
-        "wouldContinue": false,
-        "neededSampleForObserved": null
+        "label": "有差异证据"
       },
-      "review": "46.43% → 53.96%，绝对提升 +7.54%，相对 +16.2%，p < 0.0001，95% CI [+4.92%, +10.14%]（显著）。把抽象的「权益」换成具体的「已经帮你省了多少」，价值感才有载体。续费页本来就该让人算这笔账"
+      "review": "p=0.0000；95% 差值区间 [2.95, 8.18] 个百分点。指标方向：越高越好。已达预置终点，记录统计证据后另核对业务门槛与护栏。护栏未提供观测数据，不能声称已通过，也不自动全量。"
     }
   ]
 }

@@ -22,7 +22,7 @@ const claims = [
   [pct(r.obf.falsePositiveRate), 'peeking-sim: obf', 'OBF 的假阳性率'],
   [pct(r.bonferroni.falsePositiveRate), 'peeking-sim: bonferroni', 'Bonferroni 的假阳性率'],
   [`${(r.peeking.falsePositiveRate / peeking.config.alpha).toFixed(1)}×`, 'peeking-sim', '偷看相对 α 的倍数'],
-  [`${r.peeking.nStopped} / ${peeking.config.nTrials}`, 'peeking-sim', '偷看提前停止次数'],
+  [`${r.peeking.nStopped} / ${peeking.config.nTrials}`, 'peeking-sim', '偷看判显著并记录停止的总次数'],
   [`${power.simulation.detected}`, 'power-check', 'power 模拟检出次数'],
   [`${(power.simulation.actualPower * 100).toFixed(1)}%`, 'power-check', '实际检出率'],
   [`${power.design.nControl}`, 'power-check', '公式给的每组样本量'],

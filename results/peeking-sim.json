@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T17:46:23.726Z",
+  "generatedAt": "2026-10-24T17:05:45.234Z",
   "config": {
     "seed": 20260913,
     "nTrials": 2000,
@@ -21,8 +21,8 @@
     },
     {
       "key": "obf",
-      "label": "O'Brien-Fleming 序贯边界",
-      "note": "c·√(K/k)，早期门槛高、后期回落"
+      "label": "OBF 型近似（固定 c=2）",
+      "note": "c·√(K/k)，未按 α 校准，不是正式序贯设计"
     },
     {
       "key": "bonferroni",
@@ -35,6 +35,7 @@
       "falsePositiveRate": 0.0495,
       "nFalsePositives": 99,
       "nStopped": 2000,
+      "nEarlyStopped": 0,
       "stopDayDistribution": [
         {
           "day": 14,
@@ -47,6 +48,7 @@
       "falsePositiveRate": 0.2245,
       "nFalsePositives": 449,
       "nStopped": 449,
+      "nEarlyStopped": 442,
       "stopDayDistribution": [
         {
           "day": 1,
@@ -124,6 +126,7 @@
       "falsePositiveRate": 0.066,
       "nFalsePositives": 132,
       "nStopped": 132,
+      "nEarlyStopped": 106,
       "stopDayDistribution": [
         {
           "day": 4,
@@ -186,6 +189,7 @@
       "falsePositiveRate": 0.023,
       "nFalsePositives": 46,
       "nStopped": 46,
+      "nEarlyStopped": 45,
       "stopDayDistribution": [
         {
           "day": 1,

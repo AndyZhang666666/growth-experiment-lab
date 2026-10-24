@@ -9,7 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "node scripts/test-stats.mjs",
+    "test": "node scripts/test-stats.mjs && node --test scripts/test-workflow.mjs",
     "sim:peeking": "node scripts/peeking-sim.mjs",
     "sim:power": "node scripts/power-check.mjs",
     "gen:experiments": "node scripts/gen-experiments.mjs",

@@ -39,7 +39,7 @@ for (const [key, r] of Object.entries(sim.results)) {
   console.log(
     `\n${label[key]}: 假阳性率 ${(r.falsePositiveRate * 100).toFixed(2)}%` +
       ` (理论 ${(ALPHA * 100).toFixed(1)}%, ${(r.falsePositiveRate / ALPHA).toFixed(1)}x)` +
-      `  提前停止 ${r.nStopped}/${N_TRIALS}`,
+      `  提前停止 ${r.nEarlyStopped}/${N_TRIALS}（记录停止共 ${r.nStopped}）`,
   );
 }
 
