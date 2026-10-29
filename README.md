@@ -1,4 +1,27 @@
-# Growth Experiment Lab
+# Growth Experiment Lab · 增长实验工作台
+
+[在线体验](https://andyzhang666666.github.io/growth-experiment-lab/) · [English](README.en.md) · [作品索引](https://github.com/AndyZhang666666/AndyZhang666666/blob/main/PROJECTS.md)
+
+结果显著之后，还要核对什么才能决定上线？
+
+![Growth Experiment Lab · 增长实验工作台的实际产品界面](https://andyzhang666666.github.io/assets/work/showcase/growth-crop.jpg)
+
+## 值得看的设计
+
+- 实验计划先于结果，停止规则不能跟着 p 值改。
+- 把统计证据、业务最小效应和外部护栏分开。
+- 发布由人记录理由；修改输入会使旧确认失效。
+
+## 建议体验路径
+
+1. 在设计器中设定基线、最小效应、流量与时间预算。
+2. 运行反复查看模拟，比较不同检查方式的风险。
+3. 输入转化计数，核对业务门槛与护栏，再导出决策记录。
+
+**运行方式：** 本地统计工具，使用合成案例与固定种子模拟。收入是条件情景；OBF 型近似没有按输入 α 校准，不作为生产序贯方案。
+
+<details>
+<summary>展开实现、模型与验证记录</summary>
 
 [在线体验](https://andyzhang666666.github.io/growth-experiment-lab/) · [产品决策](docs/DECISIONS.md) · [验收记录](docs/VALIDATION.md)
 
@@ -68,3 +91,5 @@ TEST_URL=http://localhost:8804/growth-experiment-lab/ node scripts/test-browser.
 可用 PLAYWRIGHT_MODULE 指定模块，EVIDENCE_DIR 指定截图与下载目录。包含计划/结果导出、输入恢复、人工确认失效、Worker 取消/预算限制、旧结果溯源、键盘策略选择，以及四工作区 × 1440/768/390/360px。
 
 MIT，沿用既有许可。
+
+</details>
