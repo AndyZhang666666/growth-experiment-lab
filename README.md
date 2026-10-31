@@ -4,9 +4,13 @@
 
 结果显著之后，还要核对什么才能决定上线？
 
-![Growth Experiment Lab · 增长实验工作台的实际产品界面](https://andyzhang666666.github.io/assets/work/showcase/growth-crop.jpg)
+![Growth Experiment Lab · 增长实验工作台的实际产品界面](docs/assets/growth-preview.jpg)
 
-## 值得看的设计
+<!-- github-evidence-20261031 -->
+
+[设计取舍](docs/DECISIONS.md) · [验证说明](docs/VALIDATION.md) · [PR 核心检查](https://github.com/AndyZhang666666/growth-experiment-lab/actions/workflows/checks.yml)
+
+## 从统计证据到上线决定
 
 - 实验计划先于结果，停止规则不能跟着 p 值改。
 - 把统计证据、业务最小效应和外部护栏分开。
@@ -19,6 +23,26 @@
 3. 输入转化计数，核对业务门槛与护栏，再导出决策记录。
 
 **运行方式：** 本地统计工具，使用合成案例与固定种子模拟。收入是条件情景；OBF 型近似没有按输入 α 校准，不作为生产序贯方案。
+
+## 本地启动与检查
+
+在完整仓库根目录运行，按 CI 使用 Node.js 20：
+
+```sh
+npm ci
+npm run dev
+```
+
+打开 `http://localhost:3000/growth-experiment-lab/`，保留仓库路径。可设计实验并读取内置合成台账；统计结果、人工护栏确认和上线决定分别保留。 默认体验无需模型密钥。
+
+已有的确定性检查可以单独运行：
+
+```sh
+npm test
+npm run verify:readme
+```
+
+PR 工作流复用这些检查并完成静态构建；部署仍只由 `main` 的 Pages 工作流执行。上述检查不调用付费模型，也不代表模型效果评测。
 
 <details>
 <summary>展开实现、模型与验证记录</summary>

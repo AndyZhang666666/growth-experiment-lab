@@ -4,9 +4,13 @@
 
 What must be checked after significance before deciding to roll out?
 
-![Actual Growth Experiment Lab interface](https://andyzhang666666.github.io/assets/work/showcase/growth-crop.jpg)
+![Actual Growth Experiment Lab interface](docs/assets/growth-preview.jpg)
 
-## Product decisions
+<!-- github-evidence-20261031 -->
+
+[Design decisions](docs/DECISIONS.md) · [Validation records](docs/VALIDATION.md) · [PR core checks](https://github.com/AndyZhang666666/growth-experiment-lab/actions/workflows/checks.yml)
+
+## From statistical evidence to a rollout decision
 
 - Define the plan before reading results; do not change stopping rules to suit a p-value.
 - Separate statistical evidence, minimum practical effect and external guardrails.
@@ -33,7 +37,7 @@ npm run dev
 
 Open `http://localhost:3000/growth-experiment-lab/`. The repository base path is part of the URL.
 
-## Lightweight checks
+## Reproduce the core checks
 
 ```sh
 npm test
@@ -53,3 +57,5 @@ These commands are provided for reproduction; this documentation update did not 
 - [Implementation details and original records, Chinese](README.md)
 
 Use the repository’s existing licence and notices. This update does not change usage rights.
+
+[PR core checks](https://github.com/AndyZhang666666/growth-experiment-lab/actions/workflows/checks.yml) reuse the deterministic checks and static build. Only the main-branch Pages workflow deploys.
